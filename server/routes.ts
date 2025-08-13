@@ -16,14 +16,7 @@ const upload = multer({
 });
 
 interface AuthenticatedRequest extends Request {
-  user?: {
-    claims: {
-      sub: string;
-      email?: string;
-      first_name?: string;
-      last_name?: string;
-    };
-  };
+  user?: any; // Using any to match Express.User type from Passport
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {

@@ -108,7 +108,7 @@ export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           <div className="flex items-center space-x-3">
             <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-medium text-sm", roleColor)}>
               <span data-testid="user-initials">
-                {getInitials(user.firstName, user.lastName)}
+{getInitials(user.firstName || undefined, user.lastName || undefined)}
               </span>
             </div>
             <div className="flex-1 min-w-0">
