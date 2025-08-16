@@ -56,64 +56,64 @@ const mockDocuments = [
       ]
     }
   },
-  {
-    id: "doc2",
-    name: "Lab Results #002",
-    analysis: {
-      patientInfo: {
-        age: "32",
-        gender: "Female",
-        condition: "Routine blood work follow-up",
-        history: "Type 2 diabetes mellitus"
-      },
-      keyFindings: [
-        "HbA1c: 8.2% (elevated)",
-        "Fasting glucose: 165 mg/dL",
-        "Normal kidney function"
-      ],
-      aiRecommendations: "Diabetes management requires adjustment. Consider medication titration.",
-      riskAssessment: "Moderate Risk",
-      similarCases: [
-        "Case #C1234: Similar HbA1c, responded well to metformin increase",
-        "Case #D5678: Required insulin initiation"
-      ],
-      treatmentSuggestions: [
-        "Increase metformin to 1000mg BID",
-        "Add SGLT2 inhibitor",
-        "Diabetes education referral",
-        "Follow-up in 3 months"
-      ]
-    }
-  },
-  {
-    id: "doc3", 
-    name: "Imaging Study #003",
-    analysis: {
-      patientInfo: {
-        age: "67",
-        gender: "Male",
-        condition: "Persistent cough and weight loss",
-        history: "30 pack-year smoking history"
-      },
-      keyFindings: [
-        "3cm nodule in right upper lobe",
-        "No mediastinal lymphadenopathy",
-        "Pleural effusion absent"
-      ],
-      aiRecommendations: "Suspicious lung nodule requires tissue diagnosis. Recommend pulmonology consultation.",
-      riskAssessment: "High Risk",
-      similarCases: [
-        "Case #E9012: Similar nodule, benign on biopsy",
-        "Case #F3456: Required surgical resection"
-      ],
-      treatmentSuggestions: [
-        "CT-guided biopsy",
-        "PET scan for staging",
-        "Pulmonology referral",
-        "Smoking cessation counseling"
-      ]
-    }
-  }
+  // {
+  //   id: "doc2",
+  //   name: "Lab Results #002",
+  //   analysis: {
+  //     patientInfo: {
+  //       age: "32",
+  //       gender: "Female",
+  //       condition: "Routine blood work follow-up",
+  //       history: "Type 2 diabetes mellitus"
+  //     },
+  //     keyFindings: [
+  //       "HbA1c: 8.2% (elevated)",
+  //       "Fasting glucose: 165 mg/dL",
+  //       "Normal kidney function"
+  //     ],
+  //     aiRecommendations: "Diabetes management requires adjustment. Consider medication titration.",
+  //     riskAssessment: "Moderate Risk",
+  //     similarCases: [
+  //       "Case #C1234: Similar HbA1c, responded well to metformin increase",
+  //       "Case #D5678: Required insulin initiation"
+  //     ],
+  //     treatmentSuggestions: [
+  //       "Increase metformin to 1000mg BID",
+  //       "Add SGLT2 inhibitor",
+  //       "Diabetes education referral",
+  //       "Follow-up in 3 months"
+  //     ]
+  //   }
+  // },
+  // {
+  //   id: "doc3", 
+  //   name: "Imaging Study #003",
+  //   analysis: {
+  //     patientInfo: {
+  //       age: "67",
+  //       gender: "Male",
+  //       condition: "Persistent cough and weight loss",
+  //       history: "30 pack-year smoking history"
+  //     },
+  //     keyFindings: [
+  //       "3cm nodule in right upper lobe",
+  //       "No mediastinal lymphadenopathy",
+  //       "Pleural effusion absent"
+  //     ],
+  //     aiRecommendations: "Suspicious lung nodule requires tissue diagnosis. Recommend pulmonology consultation.",
+  //     riskAssessment: "High Risk",
+  //     similarCases: [
+  //       "Case #E9012: Similar nodule, benign on biopsy",
+  //       "Case #F3456: Required surgical resection"
+  //     ],
+  //     treatmentSuggestions: [
+  //       "CT-guided biopsy",
+  //       "PET scan for staging",
+  //       "Pulmonology referral",
+  //       "Smoking cessation counseling"
+  //     ]
+  //   }
+  // }
 ];
 
 export default function DocumentTabs() {

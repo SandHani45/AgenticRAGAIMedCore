@@ -127,7 +127,19 @@ export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         <Button
           variant="ghost"
           className="w-full justify-start text-gray-600 hover:text-gray-900"
-          onClick={() => window.location.href = '/api/logout'}
+          onClick={async () => {
+            try {
+              await fetch("/api/logout", {
+                method: "POST",
+                credentials: "include",
+              });
+              // Remove token from cookies
+              document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+              window.location.href = "/login";
+            } catch (err) {
+              window.location.href = "/login";
+            }
+          }}
           data-testid="button-logout"
         >
           <LogOut className="h-4 w-4 mr-2" />

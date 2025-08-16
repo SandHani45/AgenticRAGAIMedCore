@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Shield, Brain, Users } from "lucide-react";
+import { useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Landing() {
+// const { user, isLoading, isAuthenticated } = useAuth();
   const features = [
     {
       icon: <Shield className="h-8 w-8 text-primary" />,
@@ -37,7 +40,7 @@ export default function Landing() {
               </div>
             </div>
             <Button 
-              onClick={() => window.location.href = '/api/login'}
+              onClick={() => window.location.href = '/login'}
               className="bg-primary hover:bg-primary/90"
               data-testid="button-login"
             >
@@ -145,10 +148,10 @@ export default function Landing() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <Heart className="h-5 w-5 text-white" />
               </div>
-              <span className="font-semibold text-gray-900">MedCore</span>
+              <span className="font-semibold text-gray-900">Lexonit</span>
             </div>
             <p className="text-sm text-gray-600">
-              © 2024 MedCore. All rights reserved.
+              © 2025 Lexonit. All rights reserved.
             </p>
           </div>
         </div>
