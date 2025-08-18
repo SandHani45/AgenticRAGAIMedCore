@@ -31,12 +31,7 @@ function Router() {
         <Route
           path="/login"
           element={
-            <ProtectedRoute
-              element={<LoginPage />}
-              isAllowed={!isAuthenticated}
-              redirectPath={`/${user?.role}`}
-            />
-          }
+            <LoginPage />          }
         />
         <Route
           path="/admin"
