@@ -13,6 +13,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { useAskMe } from "@/hooks/useAskMe";
+import {useEDPoints} from '@/hooks/useEDPoints';
 
 export default function DoctorDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -38,7 +39,6 @@ export default function DoctorDashboard() {
   const fileUpload = useFileUpload({
     type: "patient",
     patientId: "patient-123",
-    query: query,
     onSuccess: () => {
       toast({
         title: "Success",
@@ -69,6 +69,29 @@ export default function DoctorDashboard() {
     },
   });
 
+const useEndpoints = useEDPoints({
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Fetched data successfully",
+      });
+    },
+    onError: (error) => {
+      if (isUnauthorizedError(error)) {
+        toast({
+          title: "Unauthorized",
+          description: "You are logged out. Logging in again...",
+          variant: "destructive",
+        });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 500);
+        return;
+      }
+    },
+  });
+
+
   if (isLoading || !user) {
     return (
       <div className="min-h-screen bg-clinical flex items-center justify-center">
@@ -77,18 +100,13 @@ export default function DoctorDashboard() {
     );
   }
 
-  let askMeMutation = useAskMe();
+
   function handleSubmit(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
     event.preventDefault();
-    if (query.trim() && !selectedFile) {
-      // Call Ask me api with query
-      askMeMutation.mutate({ query });
-      return;
-    }
 
-    if (!selectedFile) {
+    if (!selectedFile && !query.trim()) {
       toast({
         title: "No file selected",
         description: "Please select a document to upload.",
@@ -96,7 +114,14 @@ export default function DoctorDashboard() {
       });
       return;
     }
-    fileUpload.mutate(selectedFile);
+    if (query.trim() && !selectedFile) {
+      // Call Ask me api with query
+      useEndpoints.mutate({ query });
+    } else {
+      if (selectedFile) {
+        fileUpload.mutate(selectedFile);
+      }
+    }
   }
 
   function handleReset(
@@ -108,8 +133,12 @@ export default function DoctorDashboard() {
       fileUpload.reset?.();
     }
   }
-  let askMeResponse = askMeMutation?.data?.answer?.content && JSON.parse(askMeMutation.data.answer.content);
-  console.log('----------askMeMutation', askMeMutation.isPending)
+
+  console.log("----------askMeMutation", fileUpload?.data?.data?.content && JSON.parse(fileUpload?.data?.data?.content));
+  let data  = {
+    ...useEndpoints?.data?.result,
+    ...fileUpload?.data?.data
+  }
   return (
     <div className="min-h-screen bg-clinical flex">
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
@@ -251,7 +280,7 @@ export default function DoctorDashboard() {
             onClick={handleSubmit}
             disabled={fileUpload.isPending || !(selectedFile || query)}
           >
-            {!!(fileUpload.isPending || askMeResponse?.isPending) ? (
+            {!!(fileUpload.isPending || useEndpoints.isPending) ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 Generating...
@@ -269,35 +298,9 @@ export default function DoctorDashboard() {
           </Button>
         </div>
         {/* Display Ask Me response */}
-        <div className="mt-6">
-          <h4 className="font-semibold text-gray-900 mb-2">Ask Me Response</h4>
-          {askMeResponse && askMeResponse.EDPoint ? (
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm max-w-md">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-primary">ED Point</span>
-                <span className="text-lg font-bold text-primary">{askMeResponse.EDPoint.point}</span>
-              </div>
-              <div className="mt-2">
-                <span className="font-medium text-gray-700">Source:</span>
-                <ul className="mt-1">
-                  {Object.entries(askMeResponse.EDPoint.source).map(([key, value]) => (
-                    <li
-                      key={key}
-                      className="flex items-center gap-2 py-1 px-2 rounded-lg bg-green-100 text-green-700 font-semibold"
-                    >
-                      <span className="flex-1">{key}</span>
-                      <span className="px-2 py-1 bg-green-200 rounded-full">{String(value)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ) : (
-            <p className="text-sm text-gray-700">No response available</p>
-          )}
-        </div>
+  
         {/* Document Analysis Tabs */}
-        <DocumentTabs />
+        <DocumentTabs data={data} isLoading={useEndpoints.isPending || fileUpload.isPending} />
       </div>
     </div>
   );
