@@ -134,7 +134,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
   const { toast } = useToast();
   let EDPoint = data?.EDPoint;
 
-  let DocResult = !!data?.content && JSON.parse(data?.content);
+  let DocResult = data
   console.log("------------DocResult", data);
   // In a real app, this would fetch actual document data
   const documents = mockDocuments;
@@ -178,7 +178,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
           </span>
         </div>
       )}
-      {Object.keys(data).length > 0 && (
+      {Object.keys(data).length > 0 && !isLoading && (
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="w-full justify-start mb-6 bg-gray-50">
@@ -281,7 +281,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                           <div className="space-y-1 text-sm text-blue-800 mt-3">
                             <p className="font-medium">{DocResult?.answer}</p>
                             <p className="space-y-1 mt-6">
-                              <span className="font-medium">
+                              <span className="font-medium text-green-900 mb-2 bold">
                                 Key Findings :
                               </span>
                             </p>
@@ -289,17 +289,17 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                               DocResult.sources.map(
                                 (src: string, index: string) => (
                                   <>
-                                    <p key={index}>
-                                      <span className="font-medium">
-                                        Title:
+                                    <p key={index} className="font-medium text-green-900 mb-2">
+                                      <span className="font-medium text-green-900 mb-2">
+                                         Snippet:
                                       </span>{" "}
-                                      {src?.title}
+                                      {src?.snippet}
                                     </p>
-                                    <p key={index}>
-                                      <span className="font-medium">
+                                    <p key={index} className="font-medium text-green-900 mb-2">
+                                      <span className="font-medium text-green-900 mb-2">
                                         Source :
                                       </span>{" "}
-                                      {src.url}
+                                      {src.score}
                                     </p>
                                   </>
                                 )
@@ -307,7 +307,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                           </div>
                         </div>
 
-                        <div className="p-4 bg-green-50 rounded-xl">
+                        {/* <div className="p-4 bg-green-50 rounded-xl">
                           <h5 className="font-medium text-green-900 mb-2">
                             Key Findings
                           </h5>
@@ -318,9 +318,9 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                               </li>
                             ))}
                           </ul>
-                        </div>
+                        </div> */}
 
-                        <div className="p-4 bg-yellow-50 rounded-xl">
+                        {/* <div className="p-4 bg-yellow-50 rounded-xl">
                           <h5 className="font-medium text-yellow-900 mb-2 flex items-center">
                             <Brain className="h-4 w-4 mr-1" />
                             AI Recommendations
@@ -331,7 +331,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                           >
                             {doc.analysis.aiRecommendations}
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                     )}
                   </div>
