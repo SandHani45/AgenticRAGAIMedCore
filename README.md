@@ -1,1 +1,1 @@
-# AgenticRAGAIMedCore
+# AgenticRAGAILexonIT Health Demo

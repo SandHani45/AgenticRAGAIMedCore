@@ -66,7 +66,7 @@ export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
             <Heart className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900">MedCore</h2>
+            <h2 className="font-bold text-gray-900">LexonIT Health Demo</h2>
             <p className="text-xs font-medium" style={{ color: roleColor.replace('bg-', '') }}>
               {user.role === 'admin' ? 'Administrator' : user.role === 'doctor' ? 'Doctor Portal' : 'Patient Portal'}
             </p>

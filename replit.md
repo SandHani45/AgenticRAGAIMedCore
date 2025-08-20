@@ -1,8 +1,8 @@
-# MedCore Healthcare Management Platform
+# LexonIT Health Demo Healthcare Management Platform
 
 ## Overview
 
-MedCore is a production-ready full-stack healthcare management application featuring comprehensive multi-role authentication, premium clinical UI design, and sophisticated document management capabilities. The platform serves three distinct user roles - administrators, doctors, and patients - each with specialized dashboards optimized for their workflows.
+LexonIT Health Demo is a production-ready full-stack healthcare management application featuring comprehensive multi-role authentication, premium clinical UI design, and sophisticated document management capabilities. The platform serves three distinct user roles - administrators, doctors, and patients - each with specialized dashboards optimized for their workflows.
 
 The application demonstrates enterprise-grade healthcare software architecture with glassmorphism UI effects, role-based navigation, real-time user monitoring, and AI-powered document analysis simulations. Built with modern web technologies including React, TypeScript, shadcn/ui, and PostgreSQL, it provides a complete foundation for healthcare domain applications.
 

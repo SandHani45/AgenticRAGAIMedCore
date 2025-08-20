@@ -35,7 +35,7 @@ export default function Landing() {
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">MedCore</h1>
+                <h1 className="text-xl font-bold text-gray-900">LexonIT Health Demo</h1>
                 <p className="text-xs text-gray-600">Healthcare Management Platform</p>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose MedCore?
+              Why Choose LexonIT Health Demo?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Built specifically for healthcare professionals with enterprise-grade security and AI capabilities.
@@ -125,7 +125,7 @@ export default function Landing() {
                 Ready to Transform Your Healthcare Practice?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Join thousands of healthcare professionals who trust MedCore for their document management needs.
+                Join thousands of healthcare professionals who trust LexonIT Health Demo for their document management needs.
               </p>
               <Button 
                 size="lg"
