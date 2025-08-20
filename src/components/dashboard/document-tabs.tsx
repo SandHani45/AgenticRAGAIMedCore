@@ -134,8 +134,8 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
   const { toast } = useToast();
   let EDPoint = data?.EDPoint;
 
-  let DocResult = data
-  console.log("------------DocResult", data);
+  let DocResult = data?.documentData;
+  console.log("------------DocResult", DocResult);
   // In a real app, this would fetch actual document data
   const documents = mockDocuments;
 
@@ -153,6 +153,27 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
         return "bg-gray-100 text-gray-700";
     }
   };
+
+  // Recursive component for rendering nested objects
+  function RecursiveList({ data }: { data: any }) {
+    if (typeof data !== "object" || data === null) {
+      return <span className="font-mono">{String(data)}</span>;
+    }
+    return (
+      <ul className="list-disc ml-6">
+        {Object.entries(data).map(([key, value]) => (
+          <li key={key} className="mb-1 text-green-900">
+            <span className="font-semibold">{key}:</span>{" "}
+            {typeof value === "object" && value !== null ? (
+              <RecursiveList data={value} />
+            ) : (
+              <span className="font-mono">{String(value)}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <Card className="backdrop-blur-sm bg-white/80 border-blue-100">
@@ -194,7 +215,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
               ))}
             </TabsList>
 
-            { documents.map((doc) => (
+            {documents.map((doc) => (
               <TabsContent key={doc.id} value={doc.id} className="mt-0">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Document Summary */}
@@ -266,46 +287,33 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                       )}
                     </div>
 
-                    {DocResult?.answer && (
+                    {Object.keys(DocResult).length > 0 && (
                       <div className="space-y-4">
-                        <div className="p-4 bg-blue-50 rounded-xl">
-                          <h5 className="font-medium text-blue-900 mb-2">
-                            Document Details
-                          </h5>
-                          <p>
-                            <span className="font-medium text-blue-900 mb-2">
-                              Answer:
-                            </span>{" "}
-                          </p>
-
-                          <div className="space-y-1 text-sm text-blue-800 mt-3">
-                            <p className="font-medium">{DocResult?.answer}</p>
-                            <p className="space-y-1 mt-6">
+                        {/* <p className="font-medium">{DocResult?.answer}</p> */}
+                        {/* <p className="space-y-1 mt-6">
                               <span className="font-medium text-green-900 mb-2 bold">
                                 Key Findings :
                               </span>
-                            </p>
-                            {DocResult.sources &&
-                              DocResult.sources.map(
-                                (src: string, index: string) => (
-                                  <>
-                                    <p key={index} className="font-medium text-green-900 mb-2">
-                                      <span className="font-medium text-green-900 mb-2">
-                                         Snippet:
-                                      </span>{" "}
-                                      {src?.snippet}
-                                    </p>
-                                    <p key={index} className="font-medium text-green-900 mb-2">
-                                      <span className="font-medium text-green-900 mb-2">
-                                        Source :
-                                      </span>{" "}
-                                      {src.score}
-                                    </p>
-                                  </>
-                                )
-                              )}
-                          </div>
-                        </div>
+                            </p> */}
+                        {/* Render structured medical response data */}
+
+                        {/* Recursive rendering for nested medical data */}
+                        {DocResult &&
+                          Object.keys(DocResult).map((title) => {
+                            const valueData = DocResult[title];
+                            return (
+                              <div className="p-4 bg-blue-50 rounded-xl">
+                                <div className="space-y-1 text-sm text-blue-800 mt-3">
+                                  <div key={title}>
+                                    <h6 className="font-bold text-blue-900 mb-2 font-medium">
+                                      {title}
+                                    </h6>
+                                    <RecursiveList data={valueData} />
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
 
                         {/* <div className="p-4 bg-green-50 rounded-xl">
                           <h5 className="font-medium text-green-900 mb-2">
