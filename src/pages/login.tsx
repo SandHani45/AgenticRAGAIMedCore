@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
         <CardHeader>
           <div className="flex flex-col items-center">
             {/* <img src="/assets/mediconnect-logo.png" alt="MediConnect Logo" className="h-16 mb-2" /> */}
-            <CardTitle className="text-center text-3xl font-bold text-primary mb-1">MediConnect</CardTitle>
+            <CardTitle className="text-center text-3xl font-bold text-primary mb-1">LexonIT Health Demo</CardTitle>
             <span className="text-muted-foreground text-sm mb-2">Sign in to your healthcare portal</span>
           </div>
         </CardHeader>
