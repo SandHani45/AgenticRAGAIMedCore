@@ -231,7 +231,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                             <span className="font-semibold text-primary">
                               ED Point
                             </span>
-                            <span className="text-lg font-bold text-primary">
+                            <span className="font-bold text-green-700 text-5xl  ">
                               {EDPoint.point}
                             </span>
                           </div>
@@ -287,7 +287,7 @@ export default function DocumentTabs({ isLoading, data }: DocumentTabsProps) {
                       )}
                     </div>
 
-                    {Object.keys(DocResult).length > 0 && (
+                    {DocResult && Object.keys(DocResult).length > 0 && (
                       <div className="space-y-4">
                         {/* <p className="font-medium">{DocResult?.answer}</p> */}
                         {/* <p className="space-y-1 mt-6">
